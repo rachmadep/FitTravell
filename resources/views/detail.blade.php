@@ -152,7 +152,17 @@
                         <div class="col-md-12">
                             <div class="content-box">
                                 <h3>Term & Conditions</h3>
-                                <ul><li>Anda boleh merubah itinerary sesuai keinginan, silahkan langsung menghubungi admin ( 082243426006 )</li><li>Membayar DP sebesar 50% dari harga trip dan melunasi pembayaran paling lambat 7 hari sebelum tanggal keberangkatan.</li><li>Pembayaran bisa melalui Transfer ke Rek Bank BCA 0373594838 AAN HUWA MAULANA dan konfirmasi pembayaran dengan mengirimkan foto bukti transfer melalui email atau whatsapp dengan melampirkan waktu dan tanggal transfer serta nama rekening bank yang transfer</li><li>Harga Trip sewaktu-waktu dapat berubah menyesuaikan kenaikan harga bbm atau yang lainnya yang berhubungan dengan trip tanpa adanya pemberitahuan terlebih dahulu</li></ul>
+                                <ul><li>Anda boleh merubah itinerary sesuai keinginan, silahkan langsung menghubungi admin ( 082243426006 )</li><li>Membayar DP sebesar 50% dari harga trip dan melunasi pembayaran paling lambat 7 hari sebelum tanggal keberangkatan.</li><li>Pembayaran bisa melalui Transfer ke Rek <b>Bank Mandiri 0373594838 A.N. Bayu Adin H</b> dan konfirmasi pembayaran dengan mengirimkan foto bukti transfer melalui email atau whatsapp dengan melampirkan waktu dan tanggal transfer serta nama rekening bank yang transfer</li><li>Harga Trip sewaktu-waktu dapat berubah menyesuaikan kenaikan harga bbm atau yang lainnya yang berhubungan dengan trip tanpa adanya pemberitahuan terlebih dahulu</li></ul>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-tab-content tab-pane fade row" id="price">
+                        <div class="col-md-12">
+                            <div class="content-box">
+                                <h3>Rp 8.000.000</h3>
+                                <h4>1 Couple (2 Persons)</h4>
                                 
                             </div>
                         </div>
@@ -169,43 +179,13 @@
        
           <div class="single-sidebar-widget sroom-sidebar">         
               
-              <!-- Booking Form style-->
-              {{-- <div class="book-r-form"> --}}
-              
-                  {{-- <div class="room-price">
-                  <h6>Harga</h6>
-                  <p style="text-decoration: line-through;">Rp 8.500.000</p> <p>Rp 8.000.000</p>
-                  
-                  </div> --}}
-                  {{-- <form action="/checkout">
-                  
-                  <div class="book-form">
-                    <div class="col-md-12"><b>Name</b>
-                        <input class="form-control" placeholder="Name" type="text">
-                    </div>
-                    <div class="col-md-12"><b>Email</b>
-                        <input class="form-control" placeholder="Email" type="text">
-                    </div>
-
-                    <div class="col-md-12"><b>Phone</b>
-                        <input class="form-control" placeholder="Phone Number" type="text">
-                    </div>
-                    <div class="col-md-12"><b>Date Book</b>
-                        <input type="text" class="form-control datepicker-example8" placeholder="Date Book">
-                    </div>
-                    <div class="col-md-12"><b>Number tickets</b>
-                        <input class="form-control" value="1" type="text">
-                    </div>
-                  
-                  
-                  <div class="col-md-12"><div class="chk-button"><button type="submit" class="res-btn">Booking</button></div></div>
-                  </div>
-                  </form> --}}
-              {{-- </div> --}}
-              <!-- Booking Form style-->
-                <div class="room-overview">
-           <a href="" class="res-btn">Please Login to Booking <i class="fa fa-arrow-right"></i></a>   
-           </div>
+            <div class="room-overview">
+              @guest
+              <a href="" class="res-btn">Please Login to Booking <i class="fa fa-arrow-right"></i></a>
+              @else
+              <a href="" class="res-btn">Booking Now <i class="icon icon-ShoppingCart"></i></a>
+              @endguest
+            </div>
 
           </div>
 

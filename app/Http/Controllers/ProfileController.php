@@ -46,9 +46,9 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        $users = User::find($id);
-        // dd($users);
-        return view('profil', compact(['users']));
+        $user = User::find($id);
+        // dd($users->name);
+        return view('profile', compact(['user']));
 
     }
 
@@ -78,7 +78,7 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -90,7 +90,23 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required'
+        ]);
+        $user->name     = $request->name;
+        $user->email    = $request->email;
+        $user->phone    = $request->phone;
+        if ( !empty ( $request->password ) ) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        // return redirect('/profile')->with(['id'=>$id]);
+        return redirect()->to('/profile/'.$id);
     }
 
     /**

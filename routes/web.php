@@ -16,10 +16,10 @@
 // });
 
 Auth::routes();
-// Route::post('register', [
-//   'as' => 'register', 
-//   'uses' => 'Auth\RegisterController@create'
-// ]);
+Route::put('register', [
+  'as' => 'register', 
+  'uses' => 'Auth\RegisterController@create'
+]);
 
 Route::get('/', 'HomeController@index');
 Route::get('/detail', 'HomeController@detail');
@@ -27,6 +27,7 @@ Route::get('/destination', 'HomeController@destination');
 Route::get('/checkout', 'HomeController@checkout');
  
 Route::get('/profile/{id}', 'ProfileController@show');
+Route::put('/profile/{id}/update', 'ProfileController@update');
 Route::get('/order', 'ProfileController@showOrder');
 Route::get('/invoice', 'ProfileController@showInvoice');
  

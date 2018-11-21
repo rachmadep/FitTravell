@@ -87,9 +87,12 @@
                 <i class="icon icon-ShoppingCart"></i> My Order
             </a>
             <hr>
-            <a href="/logout" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
-                <i class="icon icon-ShoppingCart"></i> Logout
+            <a href="{{ route('logout') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="icon icon-Arrow"></i> Logout
             </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
             <hr>
 
             @endguest
