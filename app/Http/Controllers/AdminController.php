@@ -29,9 +29,40 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function setting()
     {
-        //
+        $user = Auth::user();
+        return view('admin/setting', compact(['user']));
+    }
+
+    public function user()
+    {
+        $user = Auth::user();
+        return view('admin/user', compact(['user']));
+    }
+
+    public function tour()
+    {
+        $user = Auth::user();
+        return view('admin/tour', compact(['user']));
+    }
+
+    public function order()
+    {
+        $user = Auth::user();
+        return view('admin/order', compact(['user']));
+    }
+
+    public function ordercompleted()
+    {
+        $user = Auth::user();
+        return view('admin/ordercompleted', compact(['user']));
+    }
+
+    public function salehistory()
+    {
+        $user = Auth::user();
+        return view('admin/salehistory', compact(['user']));
     }
 
     /**

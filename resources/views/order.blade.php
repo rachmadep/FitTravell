@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'My Order')
+
 @section('content')
 
 <!-- Header  Inner style-->

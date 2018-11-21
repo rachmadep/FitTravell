@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Bali')
+
 @section('content')
 
  <!-- Header  Inner style-->

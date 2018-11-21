@@ -33,10 +33,21 @@ Route::get('/order', 'ProfileController@showOrder');
 Route::get('/invoice', 'ProfileController@showInvoice');
 
 
-// Route::get('/adm', 'AdminController@index');
-Route::get('/adm', 'AdminController@index')    
-    ->middleware('is_admin')    
-    ->name('admin');
+Route::group(['prefix' => 'adm', 'middleware' => ['is_admin']], function(){
+    Route::get('/', 'AdminController@index');
+    Route::get('/setting', 'AdminController@setting');
+    Route::get('/user', 'AdminController@user');
+    Route::get('/tour', 'AdminController@tour');
+    Route::get('/order', 'AdminController@order');
+    Route::get('/ordercompleted', 'AdminController@ordercompleted');
+    Route::get('/salehistory', 'AdminController@salehistory');
+
+});
+// Route::get('/adm', 'AdminController@index')    
+//     ->middleware('is_admin')    
+//     ->name('admin');
+// Route::get('/adm/', 'AdminController@index');
+
  
 
 

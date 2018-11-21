@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Home')
+
 @section('content')
 <!--Home Slider-->
 <div id="minimal-bootstrap-carousel" class="carousel home2carousel slide carousel-fade shop-slider" data-ride="carousel">           

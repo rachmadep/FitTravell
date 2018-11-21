@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 {{-- Page title --}}
-@section('title', 'Users')
+@section('title', 'Web Setting')
 
 @section('content')
 <h1>test</h1>
