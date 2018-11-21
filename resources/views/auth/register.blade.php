@@ -1,11 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
+<!-- Header  Inner style-->
+<section class="row final-inner-header" style="background: url({{ asset('img/slider/slide1.jpg') }});background-size: cover;background-position: center;">
+    <div class="container">
+        <h2 class="this-title">Register</h2>
+    </div>
+ </section>
+ <section class="row final-breadcrumb">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li class="">Account</li>
+            <li class="active">Register</li>
+        </ol>
+    </div>
+ </section>
+<!-- Header  Slider style-->
 <div class="container">
+    <br><br>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                {{-- <div class="card-header">{{ __('Register') }}</div> --}}
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
