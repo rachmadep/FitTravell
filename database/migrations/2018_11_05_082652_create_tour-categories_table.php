@@ -13,8 +13,10 @@ class CreateTourCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tour-categories', function (Blueprint $table) {
+            Schema::create('tour-categories', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idTour');
+            $table->integer('idCategory');
             $table->timestamps();
         });
     }

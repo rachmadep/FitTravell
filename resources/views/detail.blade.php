@@ -185,7 +185,7 @@
               @guest
               <a href="" class="res-btn">Please Login to Booking <i class="fa fa-arrow-right"></i></a>
               @else
-              <a href="" class="res-btn">Booking Now <i class="icon icon-ShoppingCart"></i></a>
+              <a href="/checkout" class="res-btn">Booking Now <i class="icon icon-ShoppingCart"></i></a>
               @endguest
             </div>
 

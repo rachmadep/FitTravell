@@ -28,6 +28,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function booking()
+    {
+        return $this->hasMany(booking::class, 'idUser', 'id');
+    }
+
     const ADMIN_TYPE = 'admin';
     const DEFAULT_TYPE = 'default';
 
