@@ -17,14 +17,16 @@ class CreateToursTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('duration');
+            $table->integer('fakeprice')->nullable();
             $table->integer('price');
             $table->integer('person');
             $table->integer('idDestination');
-            $table->string('description');
-            $table->string('facilities');
-            $table->string('schedule');
-            $table->string('bring');
-            $table->string('term');
+            $table->text('description');
+            $table->text('facilities');
+            $table->text('schedule');
+            $table->text('bring');
+            $table->text('term');
+            $table->string('image');
             $table->timestamps();
         });
     }

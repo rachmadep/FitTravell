@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\tour;
 use Auth;
 
-class UserController extends Controller
+class TourController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,12 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $users = user::all();
-        // dd($users);
-        return view('admin/user', compact(['user'], ['users']));
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -29,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        return view('admin/tour-create', compact(['user']));
     }
 
     /**
@@ -39,8 +37,23 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        // dd($request);
+        $tour = new tour;
+        $tour->name = $request->name;
+        $tour->duration = $request->duration;
+        $tour->fakeprice = $request->fakeprice;
+        $tour->price = $request->price;
+        $tour->person = $request->person;
+        $tour->description = $request->description;
+        $tour->facilities = $request->facilities;
+        $tour->schedule = $request->schedule;
+        $tour->bring = $request->bring;
+        $tour->term = $request->term;
+        $tour->idDestination = 1;
+        $tour->save();
+
+        return redirect('/adm/tour');
     }
 
     /**
@@ -51,7 +64,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -62,10 +75,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = user::find($id);
-        return response()->json($user);
+        return view('admin/user-edit');
     }
-
 
     /**
      * Update the specified resource in storage.

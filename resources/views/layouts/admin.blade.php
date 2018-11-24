@@ -28,6 +28,7 @@
     <link href="{{ asset('admin/vendor/slick/slick.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/vendor/select2/select2.min.css') }}" rel="stylesheet" media="all">
     <link href="{{ asset('admin/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" media="all">
+    @yield('style')
 
     <!-- Main CSS-->
     <link href="{{ asset('admin/css/theme.css') }}" rel="stylesheet" media="all">
@@ -278,7 +279,11 @@
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
-                @yield('content')
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        @yield('content')
+                    </div>
+                </div>
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
