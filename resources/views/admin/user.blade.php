@@ -91,13 +91,13 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="" method="post">
+                <form class="form-horizontal" action="" method="POST">
                       <fieldset>
                           <!-- Name input-->
                           <div class="form-group">
                               <label class="col-md-2 control-label" for="name">Name</label>
                               <div class="col-md-10">
-                                  <input name="name" type="text" placeholder="Nama" value="" class="form-control"></div>
+                                  <input name="name" type="text" placeholder="Name" value="" class="form-control"></div>
                           </div>
                           <!-- Email input-->
                           <div class="form-group">
@@ -122,8 +122,8 @@
                           <!-- Form actions -->
                           <div class="form-group">
                               <div class="col-md-12 text-right">
-                                <input type="hidden" name="_method" value="PUT">
-                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                <input type="hidden" name="_method" value="POST">
+                                {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
                                 <button type="submit" class="btn btn-responsive btn-primary btn-sm">Submit</button>
                               </div>
                           </div>
@@ -132,7 +132,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
+                {{-- <button type="button" class="btn btn-primary">Confirm</button> --}}
             </div>
         </div>
     </div>
@@ -212,10 +212,7 @@
         $('#name').attr("value", data.name);;
         $('#email').attr("value", data.email);;
         $('#phone').attr("value", data.phone);;
-        // $('#keteranganShow').html(data.keterangan);
-        // $('#jumlahShow').html("Rp "+ data.jumlah);
-        // $('#buktiShow').attr("data", "/files/keuangan-bukti/"+ data.bukti);
-        // $('#ModalKuitansi').modal('show');
+;
     })
   });
 </script>

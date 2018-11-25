@@ -43,13 +43,17 @@ Route::group(['prefix' => 'adm', 'middleware' => ['is_admin']], function(){
     Route::get('/user/update/{id}', 'UserController@update');
     Route::get('/user/delete/{id}', 'UserController@destroy');
 
-    Route::get('/tour', 'AdminController@tour');
+    Route::get('/tour', 'TourController@index');
     Route::get('/tour/create', 'TourController@create');
     Route::post('/tour/store', 'TourController@store');
     Route::get('/tour/show/{id}', 'TourController@show');
     Route::get('/tour/edit/{id}', 'TourController@edit');
     Route::put('/tour/update/{id}', 'TourController@update');
     Route::get('/tour/delete/{id}', 'TourController@destroy');
+
+    Route::post('/destination/store', 'TourController@destinationStore');
+    Route::post('/tour-category/store', 'TourController@categoryStore');
+
 
     Route::get('/order', 'AdminController@order');
     Route::get('/ordercompleted', 'AdminController@ordercompleted');

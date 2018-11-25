@@ -32,11 +32,12 @@
                             <label for="select" class=" form-control-label">Destination</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <select name="" id="select" class="form-control">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
+                            <select name="idDestination" id="select" class="form-control">
+                                <option selected disabled>Select Destination</option>
+                                @foreach ($destinations as $value)
+                                  <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                @endforeach
+                                
                             </select>
                         </div>
                     </div>
@@ -44,13 +45,16 @@
                         <div class="col col-md-3">
                             <label for="select" class=" form-control-label">Category</label>
                         </div>
-                        <div class="col-12 col-md-9">
-                            <select name="" id="select" class="form-control">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
+                        <div class="col-12 col-md-9 input_fields_wrap">
+                            <div class="input-group" style="margin-top:3px;">
+                                <select name="idCategory[]" id="select" class="form-control">
+                                    <option selected disabled>Select Category</option>
+                                    @foreach ($categorys as $value)
+                                      <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="add_field_button input-group-addon danger"><i class="zmdi zmdi-plus"></i></span>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -92,7 +96,7 @@
                             <label for="description" class=" form-control-label">Description</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="description" id="description" placeholder="Content..." class="form-control summernote"></textarea>
+                            <textarea name="description" id="description" placeholder="Description" class="form-control summernote"></textarea>
                         </div>
                     </div>
 
@@ -101,7 +105,7 @@
                             <label for="textarea-input" class=" form-control-label">Facilities</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="facilities" id="facilities" placeholder="Content..." class="form-control summernote"></textarea>
+                            <textarea name="facilities" id="facilities" placeholder="Facilities" class="form-control summernote"></textarea>
                         </div>
                     </div>
 
@@ -110,7 +114,7 @@
                             <label for="textarea-input" class=" form-control-label">Schedule</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="schedule" id="schedule" placeholder="Content..." class="form-control summernote"></textarea>
+                            <textarea name="schedule" id="schedule" placeholder="Schedule" class="form-control summernote"></textarea>
                         </div>
                     </div>
 
@@ -119,7 +123,7 @@
                             <label for="textarea-input" class=" form-control-label">Things to Bring</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="bring" id="bring" placeholder="Content..." class="form-control summernote"></textarea>
+                            <textarea name="bring" id="bring" placeholder="Things to Bring" class="form-control summernote"></textarea>
                         </div>
                     </div>
 
@@ -128,7 +132,7 @@
                             <label for="textarea-input" class=" form-control-label">Term & Condition</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea name="term" id="term" placeholder="Content..." class="form-control summernote"></textarea>
+                            <textarea name="term" id="term" placeholder="Term & Condition" class="form-control summernote"></textarea>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -140,11 +144,11 @@
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
                                 <div>
                                     <span class="btn btn-primary btn-embossed btn-file">
-                                    <span class="fileinput-new"><span class="fui-image"></span>&nbsp;&nbsp;Select image</span>
-                                    <span class="fileinput-exists"><span class="fui-gear"></span>&nbsp;&nbsp;Change</span>
-                                    <input type="file" name="...">
+                                    <span class="fileinput-new"><i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Select image</span>
+                                    <span class="fileinput-exists"><i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Change</span>
+                                    <input type="hidden"><input type="file" name="image" value=""></span>
                                     </span>
-                                    <a href="#" class="btn btn-primary btn-embossed fileinput-exists" data-dismiss="fileinput"><span class="fui-trash"></span>&nbsp;&nbsp;Remove</a>
+                                    <a href="#" class="btn btn-primary btn-embossed fileinput-exists" data-dismiss="fileinput"><i class="fa fa-ban"></i>&nbsp;&nbsp;Remove</a>
                                 </div>
                             </div>
                         </div>
@@ -152,10 +156,10 @@
                     <div class="card-footer">
                         <input type="hidden" name="_method" value="POST">
                         {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-                        <button type="submit" class="btn btn-primary btn-sm">
+                        <button type="submit" class="btn btn-primary btn-lg">
                             <i class="fa fa-dot-circle-o"></i> Submit
                         </button>
-                        <button type="reset" class="btn btn-danger btn-sm">
+                        <button type="reset" class="btn btn-danger btn-lg float-right">
                             <i class="fa fa-ban"></i> Reset
                         </button>
                     </div>
@@ -179,5 +183,23 @@
 </script>
 <script>
     $('.fileinput').fileinput()
+</script>
+<script>
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+          e.preventDefault();
+          if(x < max_fields){ //max input box allowed
+              x++; //text box increment
+              $(wrapper).append('<div class="input-group" style="margin-top:3px;"><select name="idCategory[]" id="select" class="form-control"><option selected disabled>Select Category</option>@foreach ($categorys as $value)<option value="{{ $value->id }}">{{ $value->name }}</option>@endforeach</select><span class="remove_field input-group-addon danger"><i class="zmdi zmdi-block-alt"></i></span></div>'); //add input box
+          }
+      });
+
+      $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+          e.preventDefault(); $(this).parent('div').remove(); x--;
+      })
 </script>
 @endsection

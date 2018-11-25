@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\tour;
+use App\destination;
+use App\category;
+use App\tourcategory;
 use Auth;
 
 class TourController extends Controller
@@ -16,7 +19,12 @@ class TourController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+        $tours = tour::all();
+        $categorys = category::all();
+        $destinations = destination::all();
+        return view('admin/tour', compact(['user'], ['tours'], ['destinations'], ['categorys']));
+
     }
 
     /**
@@ -27,7 +35,10 @@ class TourController extends Controller
     public function create()
     {
         $user = Auth::user();
-        return view('admin/tour-create', compact(['user']));
+        $destinations = destination::all();
+        $categorys = category::all();
+
+        return view('admin/tour-create', compact(['user'], ['destinations'], ['categorys']));
     }
 
     /**
@@ -50,8 +61,44 @@ class TourController extends Controller
         $tour->schedule = $request->schedule;
         $tour->bring = $request->bring;
         $tour->term = $request->term;
-        $tour->idDestination = 1;
+        $tour->idDestination = $request->idDestination;
+        if( $request->hasFile('image')) {
+          $file = $request->file('image');
+          $ext = strtolower($file->getClientOriginalExtension());
+          $Namagambar = time().'.'.$ext;
+          $request->file('image')->move(public_path('img/tour'), $Namagambar);
+          $tour->image = $Namagambar;
+        }
         $tour->save();
+
+        foreach ($request->idCategory as $value) {
+            $tourcategory = new tourcategory;
+            $tourcategory->idTour = $tour->id;
+            $tourcategory->idCategory = $value;
+            $tourcategory->save();
+          
+        }
+
+
+        return redirect('/adm/tour');
+    }
+
+    public function destinationStore(Request $request)
+    {   
+        // dd($request);
+        $destination = new destination;
+        $destination->name = $request->name;
+        $destination->save();
+
+        return redirect('/adm/tour');
+    }
+
+    public function categoryStore(Request $request)
+    {   
+        // dd($request);
+        $category = new category;
+        $category->name = $request->name;
+        $category->save();
 
         return redirect('/adm/tour');
     }

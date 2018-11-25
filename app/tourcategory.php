@@ -8,6 +8,7 @@ use App\tour;
 
 class tourcategory extends Model
 {
+    protected $table = 'tour-categories';
     public function category()
     {
         return $this->hasMany(category::class, 'id', 'idCategory');

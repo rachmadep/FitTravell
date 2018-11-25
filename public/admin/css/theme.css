@@ -4255,8 +4255,13 @@ section {
 
 .table-earning tbody td {
     color: #808080;
-    padding: 12px 40px;
+    padding: 0px 40px;
     white-space: nowrap;
+    vertical-align: middle;
+}
+
+.sparator{
+    margin: 5px;
 }
 
 .table-earning tbody td.text-right {
