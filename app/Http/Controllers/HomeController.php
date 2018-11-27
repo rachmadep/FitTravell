@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\tour;
+use App\destination;
+use App\category;
+use App\tourcategory;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -29,6 +35,15 @@ class HomeController extends Controller
     public function detail()
     {
         return view('detail');
+    }
+
+    public function tour($id)
+    {
+        $tour = tour::with(['destination', 'category.categoryname'])->find($id);
+        $tourcategory = tourcategory::with(['categoryname'])->where('idTour', $id)->get();
+        // $destination = destination
+        // dd($tour);
+        return view('tour', compact(['user'], ['tour'], ['destinations'], ['tourcategory']));
     }
 
     public function destination()

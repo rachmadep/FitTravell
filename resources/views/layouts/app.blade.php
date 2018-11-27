@@ -67,29 +67,35 @@
                 <input class="form-control" name="name" type="text" placeholder="Enter your name" />
                 <label for="">Email</label>
                 <input class="form-control" name="email" type="text" placeholder="Enter email address" />
-                 <label for="">Phone</label>
+                <label for="">Phone</label>
                 <input class="form-control" name="phone" type="text" placeholder="Enter phone number" />
                 <label for="">Password</label>
                 <input class="form-control" name="password" type="Password" placeholder="Password" />
                 <label for="">Confirm Password</label>
                 <input class="form-control" name="password_confirmation" type="Password" placeholder="Confirm Password" />
-                <input type="hidden" name="_method" value="PUT">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <button type="submit" class="res-btn">Register</button>
+                <input type="hidden" name="_method" value="POST">
+                {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
+                <button type="submit" class="btn res-btn">Register</button>
             </form>
 
             @else
             <h3 class="title playball-font">Welcome to FitTravel</h3><!-- /.title playball-font -->
             <hr>
-            <a href="/profile/{{ Auth::user()->id }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
+            @if(Auth::user()->isAdmin())
+            <a href="/adm/" class="btn btn-primary2 btn-lg active" role="button" aria-pressed="true">
+                <i class="icon icon-Key"></i> Admin Panel
+            </a>
+            <hr>
+            @endif
+            <a href="/profile/{{ Auth::user()->id }}" class="btn btn-primary2 btn-lg active" role="button" aria-pressed="true">
                 <i class="icon icon-User"></i> Profile
             </a>
             <hr>
-            <a href="/order" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">
+            <a href="/order" class="btn btn-primary2 btn-lg active" role="button" aria-pressed="true">
                 <i class="icon icon-ShoppingCart"></i> My Order
             </a>
             <hr>
-            <a href="{{ route('logout') }}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="{{ route('logout') }}" class="btn btn-primary2 btn-lg active" role="button" aria-pressed="true" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="icon icon-Arrow"></i> Logout
             </a>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

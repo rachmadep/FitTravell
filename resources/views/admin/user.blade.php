@@ -10,18 +10,16 @@
         <div class="user-data m-b-30">
             <div class="row">
                 <div class="col-lg-6">
-                <h3 class="title-3 m-b-30">
-                    <i class="zmdi zmdi-account-calendar"></i>user data
-                </h3>
+                    <h3 class="title-3 m-b-30">
+                        <i class="zmdi zmdi-account-calendar"></i>user data
+                    </h3>
+                </div>
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-primary float-right2" data-toggle="modal" data-target="#CreateUser">
+                        Create User
+                    </button>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <button type="button" class="btn btn-primary float-right2" data-toggle="modal" data-target="#CreateUser">
-                    Create User
-                </button>
-            </div>
-            </div>
-            
-            
             
             <div class="table-responsive table-data">
                 <table class="table">
@@ -61,7 +59,7 @@
                                     <button class="item edit-user" data-toggle="modal" data-target="#EditUser" title="Edit" value="{{ $value->id }}">
                                         <i class="zmdi zmdi-edit"></i>
                                     </button>
-                                    <a haref="" class="item" title="Delete">
+                                    <a haref="/adm/user/delete/{{ $value->id }}" class="item" title="Delete">
                                         <i class="zmdi zmdi-delete"></i>
                                     </a>
                                 </div>
@@ -91,7 +89,8 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" action="" method="POST">
+                <form class="form-horizontal" action="/adm/user/store" method="POST">
+                    @csrf
                       <fieldset>
                           <!-- Name input-->
                           <div class="form-group">
@@ -124,7 +123,7 @@
                               <div class="col-md-12 text-right">
                                 <input type="hidden" name="_method" value="POST">
                                 {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> --}}
-                                <button type="submit" class="btn btn-responsive btn-primary btn-sm">Submit</button>
+                                <button type="submit" class="btn btn-responsive btn-primary btn-md">Submit</button>
                               </div>
                           </div>
                       </fieldset>
@@ -183,7 +182,7 @@
                           <div class="col-md-12 text-right">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <button type="submit" class="btn btn-responsive btn-primary btn-sm">Submit</button>
+                            <button type="submit" class="btn btn-responsive btn-primary btn-md">Submit</button>
                           </div>
                       </div>
                   </fieldset>
@@ -191,7 +190,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Confirm</button>
+                {{-- <button type="button" class="btn btn-primary">Confirm</button> --}}
             </div>
         </div>
     </div>

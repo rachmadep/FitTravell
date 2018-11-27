@@ -24,6 +24,7 @@ Auth::routes();
 // Route::get('/', 'AdminController@index');
 Route::get('/', 'HomeController@index');
 Route::get('/detail', 'HomeController@detail');
+Route::get('/tour/{id}', 'HomeController@tour');
 Route::get('/destination', 'HomeController@destination');
 Route::get('/checkout', 'HomeController@checkout');
  
@@ -38,7 +39,7 @@ Route::group(['prefix' => 'adm', 'middleware' => ['is_admin']], function(){
     Route::get('/setting', 'AdminController@setting');
 
     Route::get('/user', 'UserController@index');
-    Route::get('/user/store', 'UserController@store');
+    Route::post('/user/store', 'UserController@store');
     Route::get('/user/edit/{id}', 'UserController@edit');
     Route::get('/user/update/{id}', 'UserController@update');
     Route::get('/user/delete/{id}', 'UserController@destroy');
@@ -48,7 +49,7 @@ Route::group(['prefix' => 'adm', 'middleware' => ['is_admin']], function(){
     Route::post('/tour/store', 'TourController@store');
     Route::get('/tour/show/{id}', 'TourController@show');
     Route::get('/tour/edit/{id}', 'TourController@edit');
-    Route::put('/tour/update/{id}', 'TourController@update');
+    Route::post('/tour/update/{id}', 'TourController@update');
     Route::get('/tour/delete/{id}', 'TourController@destroy');
 
     Route::post('/destination/store', 'TourController@destinationStore');

@@ -20,7 +20,10 @@ class TourController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $tours = tour::all();
+        $tours = tour::with(['destination', 'category.categoryname'])->get();
+        // $tours = tour::with('category.category')->where('id', 11)->get();
+        // dd(json_decode($tours->implode('category')), true);
+        // dd($tours);
         $categorys = category::all();
         $destinations = destination::all();
         return view('admin/tour', compact(['user'], ['tours'], ['destinations'], ['categorys']));
@@ -122,7 +125,16 @@ class TourController extends Controller
      */
     public function edit($id)
     {
-        return view('admin/user-edit');
+        $user = Auth::user();
+        $tour = tour::with(['destination', 'category.categoryname'])->where('id', $id)->first();
+        // dd($tour);
+        $destination = destination::where('id', $tour->idDestination)->first();
+        $destinations = destination::all();
+        $categorys = category::all();
+        $tourcategory = tourcategory::with(['categoryname'])->where('idTour', $tour->id)->get();
+        // dd($tourcategory);
+
+        return view('admin/tour-edit', compact(['user'], ['destinations'], ['destination'], ['tour'], ['tourcategory'], ['categorys']));
     }
 
     /**
@@ -134,7 +146,38 @@ class TourController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tour = tour::with(['destination', 'category.categoryname'])->where('id', $id)->first();
+        $tour->name = $request->name;
+        $tour->duration = $request->duration;
+        $tour->fakeprice = $request->fakeprice;
+        $tour->price = $request->price;
+        $tour->person = $request->person;
+        $tour->description = $request->description;
+        $tour->facilities = $request->facilities;
+        $tour->schedule = $request->schedule;
+        $tour->bring = $request->bring;
+        $tour->term = $request->term;
+        $tour->idDestination = $request->idDestination;
+        if( $request->hasFile('image')) {
+          $file = $request->file('image');
+          $ext = strtolower($file->getClientOriginalExtension());
+          $Namagambar = time().'.'.$ext;
+          $request->file('image')->move(public_path('img/tour'), $Namagambar);
+          $tour->image = $Namagambar;
+        }
+        $tour->save();
+
+        tourcategory::where('idTour', $id)->delete();
+        // $tourcategory->delete();
+
+        foreach ($request->idCategory as $value) {
+            $tourcategory = new tourcategory;
+            $tourcategory->idTour = $tour->id;
+            $tourcategory->idCategory = $value;
+            $tourcategory->save();
+        }
+
+        return redirect('/adm/tour');
     }
 
     /**

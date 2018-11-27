@@ -37,8 +37,14 @@
                     <tr class="tr-shadow">
                         <td>{{ $tour->id }}</td>
                         <td>{{ $tour->name }}</td>
-                        <td>Lombok</td>
-                        <td>Category</td>
+                        <td>{{ $tour->destination->implode('name') }}</td>
+                        <td>
+                            @foreach ($tour->category as $categoryss)
+                                @foreach ($categoryss->categoryname as $categorynames)
+                                    {{ $categorynames->name }} <br> 
+                                @endforeach
+                            @endforeach 
+                        </td>
                         <td class="desc">{{ $tour->price }}</td>
                         <td>
                             <div class="table-data-feature">
@@ -188,10 +194,10 @@
                     <fieldset>
                         <div class="row form-group">
                             <div class="col col-md-3">
-                                <label for="name" class=" form-control-label">Destination</label>
+                                <label for="name" class=" form-control-label">Category</label>
                             </div>
                             <div class="col-12 col-md-9">
-                                <input type="text" id="name" name="name" placeholder="Destination Name" class="form-control">
+                                <input type="text" id="name" name="name" placeholder="Category Name" class="form-control">
                             </div>
                         </div>
                           
