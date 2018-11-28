@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Redirect;
 use App\User;
 use App\tour;
+use App\booking;
 use App\destination;
 use App\category;
 use App\tourcategory;
@@ -29,7 +31,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $tours = tour::whereNotNull('fakeprice')->get();
+
+        return view('home', compact(['tours']));
     }
 
     public function detail()
@@ -46,14 +50,54 @@ class HomeController extends Controller
         return view('tour', compact(['user'], ['tour'], ['destinations'], ['tourcategory']));
     }
 
+    public function booking($id)
+    {
+        $user = Auth::user();
+        $tour = tour::find($id);
+
+        $booking = new booking;
+        $booking->idTour = $id;
+        $booking->idUser = $user->id;
+        $booking->date = date('Y-m-d');
+        $booking->payment = 'Not Yet Paid';
+        $booking->save();
+        $ids = $booking->id;
+        // dd($booking);
+
+        //$tourcategory = tourcategory::with(['categoryname'])->where('idTour', $id)->get();
+        // $destination = destination
+        // dd($tour);
+        // return Redirect::to('checkout')->with(['id'=>$booking->id]);
+        return redirect()->route('checkout', $ids)->with('message', 'State saved correctly!!!');
+        // return view('tour', compact(['user'], ['tour'], ['destinations'], ['tourcategory']));
+    }
+
     public function destination()
     {
         return view('destination');
     }
 
-    public function checkout()
+    public function checkout($id)
     {
-        return view('checkout');
+        $booking = booking::find($id);
+        // dd($booking);
+        return view('checkout', compact(['booking']));
+    }
+
+    public function createInvoice(Request $request, $id)
+    {
+        $booking = booking::with(['user', 'tour'])->find($id);
+        $booking->departur = $request->departur;
+        $booking->save();
+        // dd($booking);
+        return redirect()->route('invoice', $id)->with('message', 'State saved correctly!!!');
+    }
+
+    public function showInvoice($id)
+    {
+        $booking = booking::with(['user', 'tour'])->find($id);
+        // dd($booking);
+        return view('invoice', compact(['booking']));
     }
     
 }

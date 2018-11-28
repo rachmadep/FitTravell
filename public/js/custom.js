@@ -282,7 +282,7 @@ $(document).ready(function() {
 	// 12. zebraDatePickerInit 
 	function zebraDatePickerInit () {
 		$('.datepicker-example8').Zebra_DatePicker({
-			 format: 'M d, Y'
+			 format: 'Y-m-d'
 		})
 	}
 	

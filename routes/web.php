@@ -25,13 +25,17 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/detail', 'HomeController@detail');
 Route::get('/tour/{id}', 'HomeController@tour');
+Route::get('/booking/{id}', 'HomeController@booking');
+Route::get('/checkout/{id}', ['as' => 'checkout', 'uses' => 'HomeController@checkout']);
 Route::get('/destination', 'HomeController@destination');
-Route::get('/checkout', 'HomeController@checkout');
+Route::post('/createinvoice/{id}', 'HomeController@createInvoice');
+Route::get('/invoice/{id}', ['as' => 'invoice', 'uses' => 'HomeController@showInvoice']);
+
  
 Route::get('/profile/{id}', 'ProfileController@show');
 Route::put('/profile/{id}/update', 'ProfileController@update');
 Route::get('/order', 'ProfileController@showOrder');
-Route::get('/invoice', 'ProfileController@showInvoice');
+// Route::get('/invoice', 'ProfileController@showInvoice');
 
 
 Route::group(['prefix' => 'adm', 'middleware' => ['is_admin']], function(){

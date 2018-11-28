@@ -62,10 +62,10 @@
                             <a href="/adm/">
                                 <i class="fas fa-tachometer-alt"></i>Dasboard</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="/adm/setting">
                                 <i class="fas fa-table"></i>Web Setting</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="/adm/user">
                                 <i class="fas fa-users"></i>Users</a>
@@ -106,10 +106,10 @@
                             <a href="/adm/">
                                 <i class="fas fa-tachometer-alt"></i>Dasboard</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="/adm/setting">
                                 <i class="fas fa-table"></i>Web Setting</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="/adm/user">
                                 <i class="fas fa-users"></i>Users</a>

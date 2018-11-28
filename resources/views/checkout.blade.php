@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Chackout')
+@section('title', 'Checkout')
 
 @section('content')
 
 <!-- Header  Inner style-->
 <section class="row final-inner-header" style="background: url({{ asset('img/slider/slide1.jpg') }});background-size: cover;background-position: center;">
     <div class="container">
-        <h2 class="this-title">Chackout</h2>
+        <h2 class="this-title">Checkout</h2>
     </div>
  </section>
  <section class="row final-breadcrumb">
@@ -16,7 +16,7 @@
             <li><a href="/">Home</a></li>
             <li class="">Tour</li>
             <li class="">Booking</li>
-            <li class="active">Chackout</li>
+            <li class="active">Checkout</li>
         </ol>
     </div>
  </section>
@@ -25,7 +25,7 @@
 <!-- Booking style-->
   <section class="container clearfix common-pad-inner booknow">
     <div class="sec-header">
-         <h2>Chackout</h2>
+         <h2>Checkout</h2>
              <h3>Billing details</h3>
          </div> 
         
@@ -37,7 +37,8 @@
                 
             </div>
          <div class="chackout-table">
-          <form action="/invoice">
+          <form action="/createinvoice/{{ $booking->id }}" method="POST">
+            @csrf
              <table class="chackout-table1 table table-border">
                 <thead>
                     <tr>
@@ -48,10 +49,10 @@
                 <tbody>
                     <tr class="cart_item">
                         <td class="product-name">
-                            HONEYMOON LOMBOK          
+                            {{ $booking->tour->implode('name') }}          
                         </td>
                         <td class="product-total">
-                            Rp 8.000.000
+                            Rp {{ $booking->tour->implode('price') }} 
                         </td>
                     </tr>
                     <tr class="cart_item">
@@ -59,7 +60,7 @@
                             Order By          
                         </td>
                         <td class="product-total">
-                            Sofyan Aji
+                            {{ $booking->user->implode('name') }} 
                         </td>
                     </tr>
                     <tr class="cart_item">
@@ -67,7 +68,7 @@
                             Person          
                         </td>
                         <td class="product-total">
-                            2 Persons
+                            {{ $booking->tour->implode('person') }} Persons
                         </td>
                     </tr>
                     <tr class="cart_item">
@@ -75,7 +76,7 @@
                             Duration          
                         </td>
                         <td class="product-total">
-                            4 Day 3 Night
+                            {{ $booking->tour->implode('duration') }}
                         </td>
                     </tr>
                     <tr class="cart_item">
@@ -83,12 +84,13 @@
                             Departure          
                         </td>
                         <td class="product-total">
-                            <input type="text" class="form-control datepicker-example8" placeholder="Departure Date" required>
+                            <input type="text" class="form-control datepicker-example8" name="departur" placeholder="Departure Date" required>
                         </td>
                     </tr>
                 </tbody>
 
             </table>
+            <input type="hidden" name="_method" value="POST">
             <button type="submit" class="res-btn" style="margin-bottom: 15px; float: right; margin-top: -10px;">
                 Create Invoice
             </button>

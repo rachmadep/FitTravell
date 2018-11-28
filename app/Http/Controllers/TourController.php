@@ -21,6 +21,7 @@ class TourController extends Controller
     {
         $user = Auth::user();
         $tours = tour::with(['destination', 'category.categoryname'])->get();
+        // $tours = tour::whereNotNull('fakeprice')->get();
         // $tours = tour::with('category.category')->where('id', 11)->get();
         // dd(json_decode($tours->implode('category')), true);
         // dd($tours);
