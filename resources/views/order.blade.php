@@ -2,6 +2,10 @@
 
 @section('title', 'My Order')
 
+@section('style')
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+@endsection
+
 @section('content')
 
 <!-- Header  Inner style-->
@@ -32,10 +36,10 @@
       <div class="boxed">
           <div class="shopping-cart">
               <div class="row">
-                  <div class="col-lg-1 col-md-1 col-sm-1 hidden-xs">
+                  <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                       <span class="col-name">Date</span>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4 hidden-xs">
+                  <div class="col-lg-3 col-md-3 col-sm-3 hidden-xs">
                       <span class="col-name text-left">Item</span>
                   </div>
                   
@@ -46,40 +50,32 @@
                       <span class="col-name">Action</span>
                   </div>
               </div>
-
+              
+              @foreach( $booking as $value )
               <div class="row">
-                  <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-                      <span class="col-name">15/12/2018</span>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-4 col-xs-3">
-                      <span class="col-name">PAKET HONEYMOON LOMBOK</span>
+                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                      <span class="col-name">{{ $value->date }}</span>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                      <span class="col-name">Rp 8.000.000</span>
+                      <span class="col-name">PAKET {{ $value->tour->implode('name') }}</span>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                      <span class="col-name">Rp {{ $value->tour->implode('price') }}</span>
                   </div>
                   
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
                       <span class="col-name">
                         
-                          <a href="/invoice" class="btn btn-primary active">View Invoice</a>
+                          <a href="/invoice/{{ $value->id }}" class="btn btn-primary active">View Invoice</a>
                           {{-- <a href="" class="btn btn-primary active">Upload proof of Payment</a> --}}
-                        <button type="button" class="btn btn-primary active" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-primary active" data-toggle="modal" data-target="#exampleModal{{ $value->id }}">
                             Upload proof of Payment
                         </button>
                       </span>
                   </div>
               </div>
-              
-
-
-              
-        
-
-              {{-- <div class="row btns-row">
-              </div> --}}
-              
-              
-            
+              @endforeach
+           
           </div>
           <hr>
       </div>
@@ -89,7 +85,8 @@
     
 </section> 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach( $booking as $value)
+<div class="modal fade" id="exampleModal{{ $value->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -99,11 +96,24 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/order/upload/{{ $value->id }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+
             <div class="form-group">
                 <label for="exampleFormControlFile1">Proof of Payment (Image)</label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                    <div>
+                        <span class="btn btn-primary btn-embossed btn-file">
+                        <span class="fileinput-new"><i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Select image</span>
+                        <span class="fileinput-exists"><i class="fa fa-dot-circle-o"></i>&nbsp;&nbsp;Change</span>
+                        <input type="hidden"><input type="file" name="image" value=""></span>
+                        </span>
+                        <a href="#" class="btn btn-primary btn-embossed fileinput-exists" data-dismiss="fileinput"><i class="fa fa-ban"></i>&nbsp;&nbsp;Remove</a>
+                    </div>
+                </div>
             </div>
+            <input type="hidden" name="_method" value="POST">
             <button type="submit" class="btn btn-primary">Upload</button>
         </form>
       </div>
@@ -114,7 +124,11 @@
     </div>
   </div>
 </div>
-    
+@endforeach
 <!-- Booking style-->
 
+@endsection
+
+@section('script')
+<script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 @endsection

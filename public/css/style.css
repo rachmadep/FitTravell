@@ -10249,7 +10249,7 @@ ol li {
     border-color: #ffffff;
 }
 
-.btn-primary:active, .btn-primary2.active, .open>.dropdown-toggle.btn-primary {
+.btn-primary2.active, .open>.dropdown-toggle.btn-primary {
     color: #fff;
     border: none;
     background-color: #0095dd;

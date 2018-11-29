@@ -32,8 +32,10 @@ class HomeController extends Controller
     public function index()
     {
         $tours = tour::whereNotNull('fakeprice')->get();
-
-        return view('home', compact(['tours']));
+        $tour = tour::whereNull('fakeprice')->take(3)->get();
+        // $tour = tour::orderBy('id', 'desc')->take(3)->get();
+        // dd($tour);whereNull('field2')
+        return view('home', compact(['tours'], ['tour']));
     }
 
     public function detail()
@@ -80,7 +82,6 @@ class HomeController extends Controller
     public function checkout($id)
     {
         $booking = booking::find($id);
-        // dd($booking);
         return view('checkout', compact(['booking']));
     }
 

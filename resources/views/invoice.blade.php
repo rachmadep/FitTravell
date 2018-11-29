@@ -32,8 +32,8 @@
         <div class="sec-header">
          <h2>Invoice</h2>
              {{-- <h3>Invoice Number : 13232</h3> --}}
-             <p>Invoice Number : 13232</p>
-             <p>Date : 15/12/2018</p>
+             <p>Invoice Number : {{ 11235+$booking->id }}</p>
+             <p>Date : {{ $booking->date }}</p>
         </div> 
         
           {{-- <h1>Invoice</h1>
@@ -44,19 +44,19 @@
     <div class="col-md-4">
       <div class="">
         <h3>Invoiced To :</h3>
-        <p>Name : Sofyan Aji</p>
-        <p>Phone Number : 123123</p>
-        <p>E-mail : user@user.com</p>
+        <p>Name : {{ $booking->user->implode('name') }}</p>
+        <p>Phone Number : {{ $booking->user->implode('phone') }}</p>
+        <p>E-mail : {{ $booking->user->implode('email') }}</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="">
         <h3>Status : Not yet paid</h3>
-        <p>Payment deadline : 1/1/2019</p>
+        <p>Payment deadline : {{ $booking->departur }}</p>
         <p>Bank : Bank Mandiri</p>
         <p>Account number : 88812138014824</p>
         <p>On behalf of the : Saya Yaa He Be De</p>
-        <p>Reference number : 4134</p>
+        <p>Reference number : 3211{{ $booking->id }}</p>
       </div>
     </div>
   </div>
@@ -86,11 +86,11 @@
                       <span class="col-name">Tour</span>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <span class="col-name">PAKET HONEYMOON LOMBOK</span>
+                      <span class="col-name">PAKET {{ $booking->tour->implode('name') }}</span>
                   </div>
                   
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <span class="col-name">Rp 8.000.000</span>
+                      <span class="col-name">Rp {{ $booking->tour->implode('price') }}</span>
                   </div>
               </div>
               <div class="row">
@@ -98,7 +98,7 @@
                       <span class="col-name">Person</span>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <span class="col-name">2 Persons</span>
+                      <span class="col-name">{{ $booking->tour->implode('person') }} Persons</span>
                   </div>
                   
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -110,7 +110,7 @@
                       <span class="col-name">Duration</span>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <span class="col-name">4 Day 3 Night</span>
+                      <span class="col-name">{{ $booking->tour->implode('duration') }}</span>
                   </div>
                   
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -122,7 +122,7 @@
                       <span class="col-name">Departure</span>
                   </div>
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                      <span class="col-name">7/1/2019</span>
+                      <span class="col-name">{{ $booking->departur }}</span>
                   </div>
                   
                   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -146,7 +146,7 @@
                                   <span class="h3">Total</span>
                               </div>
                               <div class="col-lg-6 col-md-6 col-sm-7 col-xs-6">
-                                  <span class="h3">Rp 8.000.000</span>
+                                  <span class="h3">Rp {{ $booking->tour->implode('price') }}</span>
                               </div>
 
                           </div>

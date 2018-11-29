@@ -14,8 +14,8 @@
                     <div class="box valign-middle">
                         <div class="content text-left">
                             <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
-                            <p data-animation="animated fadeInDown">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos quit.</p>
-                            <a data-animation="animated fadeInRight" href="#" class="nhs-btn">know more</a>
+                            {{-- <p data-animation="animated fadeInDown">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos quit.</p> --}}
+                            {{-- <a data-animation="animated fadeInRight" href="#" class="nhs-btn">know more</a> --}}
                         </div>
                     </div>
                 </div>
@@ -28,8 +28,8 @@
                     <div class="box valign-middle">
                         <div class="content text-center">
                             <h2 data-animation="animated fadeInUp" class="this-title">Spend Your Dream Holidays</h2>
-                            <p data-animation="animated fadeInDown">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos quit.</p>
-                            <a data-animation="animated fadeInRight" href="#" class="nhs-btn">know more</a>
+                            {{-- <p data-animation="animated fadeInDown">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos quit.</p> --}}
+                            {{-- <a data-animation="animated fadeInRight" href="#" class="nhs-btn">know more</a> --}}
                         </div>
                     </div>
                 </div>
@@ -41,9 +41,9 @@
                 <div class="thm-container">
                     <div class="box valign-middle">
                         <div class="content text-left">                         
-                            <h2  data-animation="animated fadeInUp" class="this-title">Make Your Memorable Holidays in a LakeResort</h2>
-                            <p data-animation="animated fadeInDown">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos quit.</p>
-                            <a data-animation="animated fadeInRight" href="#" class="nhs-btn">know more</a>
+                            <h2  data-animation="animated fadeInUp" class="this-title">Make Your Memorable Holidays</h2>
+                            {{-- <p data-animation="animated fadeInDown">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos quit.</p> --}}
+                            {{-- <a data-animation="animated fadeInRight" href="#" class="nhs-btn">know more</a> --}}
                         </div>
                     </div>
                 </div>
@@ -129,7 +129,23 @@
         <h3>Pick a room that best suits your taste and budget</h3>
     </div>
     <div class="room-slider">
-        <div class="roomsuite-slider-two">  
+        <div class="roomsuite-slider-two"> 
+            @foreach( $tours as $value )
+            <div class="room-suite room-suite-htwo">
+                <div class="item">
+                    <div class="ro-img"><img src="img/tour/{{ $value->image }}" class="img-responsive" alt=""></div>
+                    <div class="ro-txt">
+                        <h2>{{ $value->name }}</h2>
+                        <p>{{ $value->person }} person for {{ $value->duration }}</p>
+                        <div class="ro-text-two">
+                            <div class="left-p-two pull-left"><a href="/tour/{{ $value->id }}" class="res-btn">details</a></div>
+                            <div class="right-p-two pull-right"><p style="text-decoration: line-through;">Rp {{ $value->fakeprice }}</p> <p>Rp {{ $value->price }}</p></div>
+                        </div>         
+                    </div>
+                </div>
+            </div>
+            @endforeach 
+
             <div class="room-suite room-suite-htwo">
                 <div class="item">
                     <div class="ro-img"><img src="img/tour/honeymoon-lombok.jpg" class="img-responsive" alt=""></div>
@@ -279,20 +295,24 @@
             </div>
         </div>
         <div class="row">
+            @foreach( $tour as $value )
+            
             <div class="col-sm-4 nroom-grid">
-                <a href="/detail" class="room-img"><img src="img/tour/krakatau.jpg" alt=""></a>
+                <a href="/tour/{{ $value->id }}" class="room-img"><img src="/img/tour/{{ $value->image }}" alt=""></a>
                 <div class="row this-conts">
                     <div class="media">
-                        <div class="media-body this-title">Krakatau</div>
+                        <div class="media-body this-title">{{ $value->name }}</div>
                         <div class="media-right">
-                            <p>Rp 3.000.000</p>
+                            <p>Rp {{ $value->price }}</p>
                         </div>
                     </div>
-                    <p>Paket Tour Anak Gunung Krakatau ini dimulai dari Jakarta dan selesai di Jakarta. Dengan fasilitas charter speed boat dari Pantai Carita untuk tour keliling Anak Gunung Krakatau.</p>
-                    <a href="/detail" class="read-more">detail<i class="fa fa-arrow-right"></i></a>
+                    <p>{{ $value->person }} person for {{ $value->duration }}</p>
+                    <a href="/tour/{{ $value->id }}" class="read-more">detail<i class="fa fa-arrow-right"></i></a>
                 </div>
             </div>
-            <div class="col-sm-4 nroom-grid">
+
+            @endforeach
+            {{-- <div class="col-sm-4 nroom-grid">
                 <a href="/detail" class="room-img"><img src="img/tour/mentawai.jpg" alt=""></a>
                 <div class="row this-conts">
                     <div class="media">
@@ -317,7 +337,7 @@
                     <p>Paket Tour Festival Budaya Pasola Sumba 2019 akan diselenggarakan di Sumba pada bulan Februari dan Maret. Kami siapkan segala kebutuhan liburan selama 5 hari 4 malam di Sumba.</p>
                     <a href="/detail" class="read-more">detail<i class="fa fa-arrow-right"></i></a>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

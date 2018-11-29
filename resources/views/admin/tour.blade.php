@@ -54,7 +54,7 @@
                                 <a href="/adm/tour/delete/{{ $tour->id }}" class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                     <i class="zmdi zmdi-delete"></i>
                                 </a>
-                                <a href="" class="item" data-toggle="tooltip" data-placement="top" title="View">
+                                <a href="/tour/{{ $tour->id }}" class="item" data-toggle="tooltip" data-placement="top" title="View">
                                     <i class="zmdi zmdi-eye"></i>
                                 </a>
                             </div>

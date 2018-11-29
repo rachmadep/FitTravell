@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Redirect;
 use App\User;
+use App\tour;
+use App\booking;
+use App\destination;
+use App\category;
+use App\tourcategory;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -54,9 +61,28 @@ class ProfileController extends Controller
 
     public function showOrder()
     {
-        // $users = User::find($id);
-        // dd($users);
-        return view('order');
+        $user = Auth::user();
+        $booking = booking::with(['tour'])->where('idUser', $user->id)->get();
+        // dd($booking);
+        return view('order', compact(['booking']));
+
+    }
+
+    public function uploadOrder(Request $request, $id)
+    {
+        // dd($request);
+        $booking = booking::with(['tour'])->where('id', $id)->first();
+        if( $request->hasFile('image')) {
+          $file = $request->file('image');
+          $ext = strtolower($file->getClientOriginalExtension());
+          $Namagambar = time().'.'.$ext;
+          $request->file('image')->move(public_path('img/proof'), $Namagambar);
+          $booking->proof = $Namagambar;
+        }
+        $booking->payment = 'Awaiting review of Payments';
+        $booking->save();
+        // dd($booking);
+        return redirect('/order');
 
     }
 
@@ -67,8 +93,6 @@ class ProfileController extends Controller
         return view('invoice');
 
     }
-
-
 
     /**
      * Show the form for editing the specified resource.

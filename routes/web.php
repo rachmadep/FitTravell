@@ -35,6 +35,7 @@ Route::get('/invoice/{id}', ['as' => 'invoice', 'uses' => 'HomeController@showIn
 Route::get('/profile/{id}', 'ProfileController@show');
 Route::put('/profile/{id}/update', 'ProfileController@update');
 Route::get('/order', 'ProfileController@showOrder');
+Route::post('/order/upload/{id}', 'ProfileController@uploadOrder');
 // Route::get('/invoice', 'ProfileController@showInvoice');
 
 
@@ -60,7 +61,7 @@ Route::group(['prefix' => 'adm', 'middleware' => ['is_admin']], function(){
     Route::post('/tour-category/store', 'TourController@categoryStore');
 
 
-    Route::get('/order', 'AdminController@order');
+    Route::get('/order', 'OrderController@index');
     Route::get('/ordercompleted', 'AdminController@ordercompleted');
     Route::get('/salehistory', 'AdminController@salehistory');
 

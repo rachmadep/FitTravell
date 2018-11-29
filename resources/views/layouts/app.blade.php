@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">    
     <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png">
-
+    @yield('style')
 
 </head>
 <body>
